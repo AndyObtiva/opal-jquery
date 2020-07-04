@@ -11,21 +11,21 @@ RSpec.describe "Element#class_name" do
     <div class="red light"></div>
   HTML
 
-  it "should return the elements' class name" do
+  async "should return the elements' class name" do
     Element.find('#foo').class_name.should == "whiskey"
     Element.find('#bar').class_name.should == "scotch brandy"
   end
 
-  it "should return an empty string for element with no class name" do
+  async "should return an empty string for element with no class name" do
     Element.find('#baz').class_name.should == ""
     Element.find('#buz').class_name.should == ""
   end
 
-  it "should return class name for first element if more than 1 in set" do
+  async "should return class name for first element if more than 1 in set" do
     Element.find('.red').class_name.should == "red dark"
   end
 
-  it "should return an empty string for instances with no elements" do
+  async "should return an empty string for instances with no elements" do
     Element.find('.no-elements').class_name.should == ""
   end
 end
@@ -49,12 +49,12 @@ RSpec.describe "Element#class_name=" do
     @div.remove
   end
 
-  it "should set the given class name on the element" do
+  async "should set the given class name on the element" do
     Element.find('#foo').class_name = "apples"
     Element.find('#foo').class_name.should == "apples"
   end
 
-  it "should replace any existing class name" do
+  async "should replace any existing class name" do
     bar = Element.find('#bar')
     bar.class_name.should == "oranges"
 
@@ -62,7 +62,7 @@ RSpec.describe "Element#class_name=" do
     bar.class_name.should == "lemons"
   end
 
-  it "should set the class name on all elements in instance" do
+  async "should set the class name on all elements in instance" do
     el = Element.find '.banana'
     el.length.should == 2
 

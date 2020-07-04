@@ -16,7 +16,7 @@ RSpec.describe Element do
   HTML
 
   describe '#each' do
-    it "should change all td to pippa" do
+    async "should change all td to pippa" do
       Element.find('table.players td').each do |el|
         el.html = "pippa"
       end
@@ -26,7 +26,7 @@ RSpec.describe Element do
   end
 
   describe '#map' do
-    it "should change all td.surname as array of stirng" do
+    async "should change all td.surname as array of stirng" do
       lst = Element.find('table.players td.surname').map  {|el| el.html }
 
       lst.should == ['rossi','bianchi']
@@ -34,16 +34,16 @@ RSpec.describe Element do
   end
 
   describe "#to_a" do
-    it "should return a list of class Array" do
+    async "should return a list of class Array" do
       Element.find('table.players td.surname').to_a.class.should == Array
     end
 
-    it "should check first and last element" do
+    async "should check first and last element" do
       Element.find('table.players td.surname').to_a.first.html == "rossi"
       Element.find('table.players td.surname').to_a.last.html == "bianchi"
     end
 
-    it "should get only element with class surname" do
+    async "should get only element with class surname" do
       Element.find('table.players td').to_a.select {|el| el.has_class?('surname') }.
       map {|el| el.class }.uniq  == ['surname']
     end

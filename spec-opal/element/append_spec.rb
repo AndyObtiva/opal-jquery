@@ -1,4 +1,5 @@
 require "spec_helper"
+require 'opal/jquery/element'
 
 RSpec.describe "Element#append" do
   html <<-HTML
@@ -7,15 +8,15 @@ RSpec.describe "Element#append" do
     <div id="baz"></div>
     <div id="buz"></div>
   HTML
-
-  it "should insert the HTML string to the end of each element" do
+  
+  async "should insert the HTML string to the end of each element" do
     Element.find('.first-append').append '<p class="woosh"></p>'
 
     Element.find('#foo').children.class_name.should == "woosh"
     Element.find('#bar').children.class_name.should == "woosh"
   end
 
-  it "should insert the given DOM node at the end of the element" do
+  async "should insert the given DOM node at the end of the element" do
     baz = Element.find('#baz')
     buz = Element.find('#buz')
 

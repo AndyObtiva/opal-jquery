@@ -6,14 +6,14 @@ RSpec.describe HTTP do
   let(:bad_url) { '/spec/fixtures/does_not_exist.txt' }
 
   describe ".setup" do
-    it 'presents the $.ajaxSetup() object as a Hash' do
+    async 'presents the $.ajaxSetup() object as a Hash' do
       expect(HTTP.setup).to be_a Hash
     end
   end
 
   describe ".get" do
     describe "with a block" do
-      it "returns the http object instance" do
+      async "returns the http object instance" do
         expect(HTTP.get(good_url) {}).to be_a HTTP
       end
 
@@ -31,7 +31,7 @@ RSpec.describe HTTP do
     end
 
     describe "without a block" do
-      it "returns a promise" do
+      async "returns a promise" do
         expect(HTTP.get(good_url)).to be_a Promise
       end
 

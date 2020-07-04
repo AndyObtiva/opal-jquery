@@ -7,7 +7,7 @@ RSpec.describe "Element#append_to" do
     <div id="baz"></div>
   HTML
 
-  it "should insert the receiver into the target element" do
+  async "should insert the receiver into the target element" do
     Element.find('#foo').children.size.should == 0
 
     Element.parse('<ul class="kapow"></ul>').append_to Element.find('#foo')

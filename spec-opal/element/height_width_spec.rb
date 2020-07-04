@@ -6,13 +6,13 @@ RSpec.describe "Element height and width" do
   HTML
 
   describe '#height' do
-    it "should grab height of existing element" do
+    async "should grab height of existing element" do
       elm = Element.id('dimensions')
 
       expect(elm.height).to eq(200)
     end
 
-    it "should return nil if item does not exist" do
+    async "should return nil if item does not exist" do
       elm = Element.find('#not-an-elm')
 
       expect(elm.height).to eq(nil)
@@ -20,7 +20,7 @@ RSpec.describe "Element height and width" do
   end
 
   describe '#height=' do
-    it "should allow us to set height" do
+    async "should allow us to set height" do
       elm = Element.id('dimensions')
       elm.height = 121
 
@@ -29,13 +29,13 @@ RSpec.describe "Element height and width" do
   end
 
   describe '#width' do
-    it "should grab width of existing element" do
+    async "should grab width of existing element" do
       elm = Element.id('dimensions')
 
       expect(elm.width).to eq(100)
     end
 
-    it "should return nil if item does not exist" do
+    async "should return nil if item does not exist" do
       elm = Element.find('#not-an-elm')
 
       expect(elm.width).to eq(nil)
@@ -43,7 +43,7 @@ RSpec.describe "Element height and width" do
   end
 
   describe '#width=' do
-    it "should allow us to set width" do
+    async "should allow us to set width" do
       elm = Element.id('dimensions')
       elm.width = 121
 

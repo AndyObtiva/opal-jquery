@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe 'Kernel#alert' do
-  it 'returns nil' do
+  async 'returns nil' do
     begin
       original_alert = `window.alert`
       message = nil

@@ -10,7 +10,7 @@ RSpec.describe Event do
     </div>
   HTML
 
-  it '#current_target returns the current element in the bubbling' do
+  async '#current_target returns the current element in the bubbling' do
     foo = Element['#foo']
     bar = Element['#bar']
     result = []
@@ -26,7 +26,7 @@ RSpec.describe Event do
     result.should == ['bar', 'foo']
   end
 
-  it '#type returns the type of event' do
+  async '#type returns the type of event' do
     type = nil
     foo  = Element['#foo']
 
@@ -44,7 +44,7 @@ RSpec.describe Event do
     type.should == :opal_random
   end
 
-  it '#target returns a JQuery wrapper around the element that triggered the event' do
+  async '#target returns a JQuery wrapper around the element that triggered the event' do
     foo = Element['#foo']
     bar = Element['#bar']
     target = nil

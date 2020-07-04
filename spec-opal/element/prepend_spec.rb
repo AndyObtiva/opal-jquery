@@ -8,7 +8,7 @@ RSpec.describe 'Element#prepend' do
     </div>
   HTML
 
-  it 'inserts the given html to beginning of element' do
+  async 'inserts the given html to beginning of element' do
     foo = Element.find '#foo'
     bar = Element.find '#bar'
 

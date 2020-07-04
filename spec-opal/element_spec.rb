@@ -10,7 +10,7 @@ RSpec.describe Element do
     HTML
 
     describe '#on' do
-      it 'adds an event listener onto the elements' do
+      async 'adds an event listener onto the elements' do
         count = 0
         foo   = Element['#foo']
 
@@ -24,7 +24,7 @@ RSpec.describe Element do
         count.should == 2
       end
 
-      it 'takes an optional second parameter to delegate events' do
+      async 'takes an optional second parameter to delegate events' do
         count = 0
         foo   = Element['#foo']
         bar   = Element['#bar']
@@ -41,7 +41,7 @@ RSpec.describe Element do
         count.should == 2
       end
 
-      it 'can listen for non-browser events' do
+      async 'can listen for non-browser events' do
         count = 0
         foo   = Element['#foo']
 
@@ -53,12 +53,12 @@ RSpec.describe Element do
         count.should == 2
       end
 
-      it 'returns the given handler' do
+      async 'returns the given handler' do
         handler = proc {}
         Element['#foo'].on(:click, &handler).should == handler
       end
 
-      it 'has an Event instance passed to the handler' do
+      async 'has an Event instance passed to the handler' do
         foo = Element['#foo']
         foo.on :click do |event|
           event.should be_kind_of(Event)
@@ -66,7 +66,7 @@ RSpec.describe Element do
         foo.trigger(:click)
       end
 
-      it 'has an Event instance, plus any additional parameters passed to the handler' do
+      async 'has an Event instance, plus any additional parameters passed to the handler' do
         foo = Element['#foo']
         foo.on :bozo do |event, foo, bar, baz, buz|
           event.should be_kind_of(Event)
@@ -80,7 +80,7 @@ RSpec.describe Element do
     end
 
     describe '#off' do
-      it 'removes event handlers that were added using #on' do
+      async 'removes event handlers that were added using #on' do
         count = 0
         foo   = Element['#foo']
 
@@ -94,7 +94,7 @@ RSpec.describe Element do
         count.should == 1
       end
 
-      it 'removes event handlers added with a selector' do
+      async 'removes event handlers added with a selector' do
         count = 0
         foo   = Element['#foo']
         bar   = Element['#bar']
@@ -122,24 +122,24 @@ RSpec.describe Element do
     HTML
 
     describe ".[]" do
-      it "should be able to find elements with given id" do
+      async "should be able to find elements with given id" do
         Element['#foo'].class_name.should == "bar"
         Element['#foo'].size.should == 1
       end
 
-      it "should be able to match any valid CSS selector" do
+      async "should be able to match any valid CSS selector" do
         Element['.woosh'].should be_kind_of(Element)
         Element['.woosh'].size.should == 2
       end
 
-      it "should return an empty Elements instance when not matching any elements" do
+      async "should return an empty Elements instance when not matching any elements" do
         dom = Element['.some-non-existing-class']
 
         dom.should be_kind_of(Element)
         dom.size.should == 0
       end
 
-      it "should accept an HTML string and parse it into a Elements instance" do
+      async "should accept an HTML string and parse it into a Elements instance" do
         el = Element['<div id="foo-bar-baz"></div>']
 
         el.should be_kind_of(Element)
@@ -149,7 +149,7 @@ RSpec.describe Element do
     end
 
     describe ".find" do
-      it "should find all elements matching CSS selector" do
+      async "should find all elements matching CSS selector" do
         foo = Element.find '.find-foo'
         foo.should be_kind_of(Element)
         foo.length.should == 2
@@ -159,7 +159,7 @@ RSpec.describe Element do
         bar.length.should == 1
       end
 
-      it "should return an empty Element instance with length 0 when no matching" do
+      async "should return an empty Element instance with length 0 when no matching" do
         baz = Element.find '.find-baz'
         baz.should be_kind_of(Element)
         baz.length.should == 0
@@ -167,7 +167,7 @@ RSpec.describe Element do
     end
 
     describe ".not" do
-      it "should subtract from a set of elements" do
+      async "should subtract from a set of elements" do
         divs = Element['#foo, .woosh']
         divs.should be_kind_of(Element)
         divs.size.should == 3
@@ -179,18 +179,18 @@ RSpec.describe Element do
     end
 
     describe '.id' do
-      it "should return a new instance with the element with given id" do
+      async "should return a new instance with the element with given id" do
         Element.id('foo').should be_kind_of(Element)
         Element.id('foo').id.should == 'foo'
       end
 
-      it "should return nil if no element could be found" do
+      async "should return nil if no element could be found" do
         Element.id('bad-element-id').should be_nil
       end
     end
 
     describe '.parse' do
-      it "should return a new instance with parsed element as single element" do
+      async "should return a new instance with parsed element as single element" do
         foo = Element.parse '<div id="foo" class="bar"></div>'
         foo.id.should == 'foo'
         foo.class_name.should == 'bar'
@@ -205,23 +205,23 @@ RSpec.describe Element do
       <div id="data-ford" data-authur="dent" data-baz="bar"></div>
     HTML
 
-    it "sets a data attribute" do
+    async "sets a data attribute" do
       foo = Element.id('data-foo')
       foo.data 'bar', 'baz'
       expect(foo.data('bar')).to eq('baz')
     end
 
-    it "can retrieve a data attribute" do
+    async "can retrieve a data attribute" do
       expect(Element.id('data-ford').data('authur')).to eq('dent')
     end
 
-    it "can retrieve all data attributes" do
+    async "can retrieve all data attributes" do
       expect(Element.id('data-ford').data).to eq(
         'authur' => 'dent', 'baz' => 'bar'
       )
     end
 
-    it "returns nil for an undefined data attribute" do
+    async "returns nil for an undefined data attribute" do
       expect(Element.id('data-ford').data('not-here')).to be_nil
     end
   end
@@ -231,11 +231,11 @@ RSpec.describe Element do
       <div id="foo">bar</div>
     HTML
 
-    it "retrieves the inner html content for the element" do
+    async "retrieves the inner html content for the element" do
       expect(Element.id('foo').html).to include('bar')
     end
 
-    it "can be used to set inner html of element by passing string" do
+    async "can be used to set inner html of element by passing string" do
       foo = Element.id 'foo'
       foo.html "different content"
 
@@ -245,7 +245,7 @@ RSpec.describe Element do
   end
 
   describe '#prop' do
-    it 'converts nil to null' do
+    async 'converts nil to null' do
       checkbox = Element.new(:input).attr(:type, :checkbox)
 
       checkbox.prop(:checked, nil)
@@ -254,7 +254,7 @@ RSpec.describe Element do
   end
 
   describe '#==' do
-    it 'uses .is()' do
+    async 'uses .is()' do
       expect(Element['body']).to eq(Element['body'])
     end
   end
