@@ -6,3 +6,6 @@ gh-pages
 /.bundle
 .yardoc
 /doc
+.ruby-version
+.ruby-gemset
+.gladiator
